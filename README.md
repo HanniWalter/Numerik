@@ -1,3 +1,3 @@
-# Nummerik
+# Numerik
 
-matlab students project for "Nummerik für Lehramt" homework.
+matlab students project for "Numerik für Lehramt" homework.

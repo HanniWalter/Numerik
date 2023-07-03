@@ -1,3 +1,7 @@
+# helper for ZSFmitPLR
+# see script for pseudocode
+# creates 0 colums below the main diagonal
+
 function [L,A] = algo3(A, n)
    L = eye(n)
    for k = 1:n-1

@@ -4,10 +4,10 @@ function [P,L,R] = ZSFmitPLR(matrix)
 
     # check sqaure
     if n != m
-        error('Die Matrix ist nicht quadratisch.');
+        error('The sizes of the matrices do not match');
     end
 
-   #create P
+  # create z to create P
     matrix_copy = matrix;
     z = 1:n;
     for j = 1:n
@@ -21,20 +21,23 @@ function [P,L,R] = ZSFmitPLR(matrix)
       matrix_copy(X,:) = matrix_copy(X([2,1]),:);
             z([j largest_i]) = z([largest_i j])
     endfor
-    P = zeros(n,n);
 
+   #create P from z
+    P = zeros(n,n);
     for i = 1:n
      P(i,z(i)) = 1;
     endfor
 
     A = P*matrix
     [L,R] = algo3(A,n);
+
+    # check if invertable
     for i = 1:n
       if R(i,i) == 0
-       error('matrix not invertable');
+       error('matrix is not invertable');
       endif
       if L(i,i) == 0
-       error('matrix not invertable');
+       error('matrix is not invertable');
       endif
     endfor
 end

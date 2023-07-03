@@ -7,10 +7,11 @@ function x = solveRxy(R,y)
   [n, m] = size(R);
   [s, _] = size(y);
   if n ~= m || m ~= s
-    error('Die Größen der Matrizen passen nicht zusammen.');
+    error('The sizes of the matrices do not match');
   end
   x = zeros(n,1)
 
+  #backward Gaussian elimination, bring R in upper triangular form while Rx = y is still true
   for i = n:-1:1
    for j = i-1:-1:1
 
@@ -20,6 +21,7 @@ function x = solveRxy(R,y)
     y(j) = y(j) + a * y(i);
    endfor
   endfor
+  #dig(R) is not ones so divide y by R(i,i)
   for i = 1:n
     x(i) = y(i)/R(i,i)
   endfor

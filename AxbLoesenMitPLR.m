@@ -1,8 +1,11 @@
 function X =  AxbLoesenMitPLR(A,B)
   #check size
-
-
   [n,m] = size(B);
+  [p,q] = size(A);
+  if n ~= p
+    error('Die Größen der Matrizen passen nicht zusammen.');
+  end
+
   [P,L,R] = ZSFmitPLR(A);
 
   X = zeros(n,m);

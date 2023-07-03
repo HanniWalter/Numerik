@@ -1,24 +1,18 @@
 
 function [P,L,R] = ZSFmitPLR(matrix)
-    [rows, cols] = size(matrix);
+    [n, m] = size(matrix);
 
     # check sqaure
-    if rows != cols
-        disp('Die Matrix ist nicht quadratisch.');
-        L = 0
-        R = 0
-        P = 0
-        return
+    if n != m
+        error('Die Matrix ist nicht quadratisch.');
     end
-    #check inversable
-    #todo
 
    #create P
     matrix_copy = matrix;
-    z = 1:rows;
-    for j = 1:cols
+    z = 1:n;
+    for j = 1:n
       largest_i = j;
-      for i = j:rows
+      for i = j:n
         if abs(matrix_copy(i,j)) > abs(matrix_copy(largest_i,j))
           largest_i = i;
         endif
@@ -27,13 +21,20 @@ function [P,L,R] = ZSFmitPLR(matrix)
       matrix_copy(X,:) = matrix_copy(X([2,1]),:);
             z([j largest_i]) = z([largest_i j])
     endfor
-    P = zeros(rows,cols);
+    P = zeros(n,n);
 
-    for i = 1:rows
+    for i = 1:n
      P(i,z(i)) = 1;
     endfor
-    #P created
 
     A = P*matrix
-    [L,R] = algo3(A,rows);
+    [L,R] = algo3(A,n);
+    for i = 1:n
+      if R(i,i) == 0
+       error('matrix not invertable');
+      endif
+      if L(i,i) == 0
+       error('matrix not invertable');
+      endif
+    endfor
 end

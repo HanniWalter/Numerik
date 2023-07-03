@@ -1,6 +1,16 @@
 function y = solveLyPb(L,P,b)
   #sizecheck
-  [n, _] = size(L);
+  if isrow(b)
+            b = b.';
+  end
+
+  [n, m] = size(L);
+  [p, q] = size(P);
+  [s, _] = size(b);
+    if n ~= m || m ~= p || p ~= q  || q ~= s
+        error('Die Größen der Matrizen passen nicht zusammen.');
+    end
+
   y = zeros(n,1)
   Pb = P * b
   for i = 1:n

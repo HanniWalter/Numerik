@@ -1,6 +1,14 @@
 function x = solveRxy(R,y)
   #sizecheck
-  [n, _] = size(R);
+  if isrow(y)
+    y = y.';
+  end
+
+  [n, m] = size(R);
+  [s, _] = size(y);
+  if n ~= m || m ~= s
+    error('Die Größen der Matrizen passen nicht zusammen.');
+  end
   x = zeros(n,1)
 
   for i = n:-1:1

@@ -10,9 +10,9 @@ function [P,L,R] = ZSFmitPLR(A)
   # create z to create P
     z = 1:n;
 
-# creates 0 colums below the main diagonal saves swaps in z
-     L = eye(n)
-     for k = 1:n-1
+     # creates 0 colums below the main diagonal saves swaps in z
+     L = zeros(n,n)
+     for k = 1:n
       #row swapping
       largest_index = k;
       for i = k:n
@@ -24,16 +24,20 @@ function [P,L,R] = ZSFmitPLR(A)
       #swapping
       X = [k,largest_index];
       A(X,:) = A(X([2,1]),:);
-      z([k largest_index]) = z([largest_index k]);
+      L(X,:) = L(X([2,1]),:);
+      z(X) = z(X([2,1]));
 
       for i = k+1 : n
         L(i,k) = A(i,k) / A(k,k);
         for j = k : n
-          A(i,j) = A(i,j)- A(k,j) * L(i,k)
+          A(i,j) = A(i,j)- A(k,j) * L(i,k);
         endfor
       endfor
     endfor
     R = A;
+    for i = 1:n;
+     L(i,i) = 1;
+    endfor
    #create P from z
     P = zeros(n,n);
     for i = 1:n

@@ -1,6 +1,6 @@
 % Matrix erstellen (quadratisch)
-A = [1 1 1 1;1 1 1 1;3 4 2 1;3 2 1 2];
-B = [2 1 0 0 0;2 0 1 0 0;-7 0 0 1 0;1 0 0 0 1];
+A = [0 3 3;-1 3 4; -2 1 5];
+B = [2 1 0 ;2 0 1 ;-7 0 0;1 0 0];
 X= AxbLoesenMitPLR(A, B);
 disp(X)
 

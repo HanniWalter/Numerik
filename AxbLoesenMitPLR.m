@@ -1,11 +1,18 @@
 function X =  AxbLoesenMitPLR(A,B)
   #check size
+  transposed = false
   [n,m] = size(B);
   [p,q] = size(A);
   if n ~= p
-    error('The sizes of the matrices do not match');
-  end
+   if m == p
+    B = B.'
+    transposed = true
 
+   else
+    error('The sizes of the matrices do not match');
+    end
+  endif
+  [n,m] = size(B);
   #precalculate P L R
   [P,L,R] = ZSFmitPLR(A);
 
@@ -21,4 +28,7 @@ function X =  AxbLoesenMitPLR(A,B)
       X(j,i) = x(j)
     endfor
   endfor
+  if transposed
+   X = X.'
+  endif
 end

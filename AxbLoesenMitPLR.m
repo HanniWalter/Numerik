@@ -1,34 +1,15 @@
-function X =  AxbLoesenMitPLR(A,B)
-  #check size
-  transposed = false
-  [n,m] = size(B);
-  [p,q] = size(A);
-  if n ~= p
-   if m == p
-    B = B.'
-    transposed = true
-
-   else
-    error('The sizes of the matrices do not match');
-    end
+function X =  AxbLoesenMitPLR()
+  #read A and B from console
+  A = input('Input A: like [1,2;3,4;5,6;7,8;9,10] ');
+  if not(ismatrix(A))
+   error('A is not a matrix');
   endif
-  [n,m] = size(B);
-  #precalculate P L R
-  [P,L,R] = ZSFmitPLR(A);
-
-  X = zeros(n,m);
-  #for each colum b in B solve A*x = b
-  for i = 1:m
-    b = B(:, i);
-    y = solveLyPb(L,P,b);
-    x = solveRxy(R,y);
-
-    #put x in X
-    for j = 1:n
-      X(j,i) = x(j)
-    endfor
-  endfor
-  if transposed
-   X = X.'
+  B = input('Input B: like [1,2;3,4;5,6;7,8;9,10] ');
+  if not(ismatrix(B))
+   error('A is not a matrix');
   endif
+
+  #solve A*X = B for X
+  solveAXB(A,B);
+
 end

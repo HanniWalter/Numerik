@@ -11,7 +11,7 @@ function [P,L,R] = ZSFmitPLR(A)
     z = 1:n;
 
      # creates 0 colums below the main diagonal saves swaps in z
-     L = zeros(n,n)
+     L = zeros(n,n);
      for k = 1:n
       #row swapping
       largest_index = k;

@@ -11,9 +11,9 @@ function y = solveLyPb(L,P,b)
         error('The sizes of the matrices do not match.');
     end
   #precalculate P * b
-  Pb = P * b
+  Pb = P * b;
 
-  y = zeros(n,1)
+  y = zeros(n,1);
   #Gaussian elimination , bring L in lower triangular form while Lx = Pb is still true
   for i = 1:n
    for j = i+1:n
@@ -24,6 +24,6 @@ function y = solveLyPb(L,P,b)
   endfor
   #dig(L) may not be ones so divide y by L(i,i)
   for i = 1:n
-    y(i) = Pb(i)/L(i,i)
+    y(i) = Pb(i)/L(i,i);
   endfor
 end
